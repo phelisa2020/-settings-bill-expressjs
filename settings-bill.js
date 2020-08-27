@@ -1,5 +1,4 @@
-var moment = require('moment'); // require
-moment().format(); 
+ 
 module.exports = function settingsBill(){
 	var callCost  
 	var smsCost 
@@ -36,7 +35,7 @@ function recordAction(action){
 	actionList.push({
 		type: action,
 		cost,
-		timestamp: moment().startOf('minutes').fromNow()
+		timestamp: new Date()
 	})
 	}		
 }

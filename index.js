@@ -2,6 +2,7 @@ const express = require("express");
 const exphbs  = require('express-handlebars');
 const bodyParser = require('body-parser');
 const SettingsBill = require('./settings-bill')
+var moment = require('moment'); // require
 
 
 
@@ -44,13 +45,30 @@ app.post('/action', function(req, res){
 });
 
 app.get('/actions', function(req, res){
-	res.render('actions', {actions: settingsBill.actions()})
+	const listOfActions = settingsBill.actions()
+
+    for (action of listOfActions) {
+        action.prettyDate = moment(action.timestamp).fromNow();
+    }
+    
+    res.render("actions", {
+        actions : listOfActions
+    });
 	
 });
 
 app.get('/actions/:actionType', function(req, res){
 	const actionType = req.params.actionType;
-	res.render('actions', {actions: settingsBill.actionsfor(actionType)})
+	const listOfActions = settingsBill.actionsfor(actionType)
+
+	 for (action of listOfActions) {
+        action.prettyDate = moment(action.timestamp).fromNow();
+    }
+    
+    res.render("actions", {
+        actions : listOfActions
+    });
+	
 	
 	
 });
