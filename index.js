@@ -3,6 +3,8 @@ const exphbs  = require('express-handlebars');
 const bodyParser = require('body-parser');
 const SettingsBill = require('./settings-bill')
 
+
+
 const app = express()
 const settingsBill = SettingsBill()
 
@@ -50,7 +52,10 @@ app.get('/actions/:actionType', function(req, res){
 	const actionType = req.params.actionType;
 	res.render('actions', {actions: settingsBill.actionsfor(actionType)})
 	
+	
 });
+	
+
 const PORT = process.env.PORT || 3011;
 app.listen(PORT, function(){
 	console.log('App started at port:', PORT);

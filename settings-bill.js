@@ -1,16 +1,18 @@
+var moment = require('moment'); // require
+moment().format(); 
 module.exports = function settingsBill(){
-	var callCost = 0
-	var smsCost = 0
-	var warningLevel = 0
-	var criticalLevel = 0
+	var callCost  
+	var smsCost 
+	var warningLevel 
+	var criticalLevel 
 	
 	let actionList = []
 
 	function setSettings(settings){
     callCost = Number(settings.callCost); 
     smsCost = Number(settings.smsCost);
-    warningLevel = settings.warningLevel; 
-    criticalLevel = settings.criticalLevel;
+    warningLevel = Number(settings.warningLevel); 
+    criticalLevel = Number(settings.criticalLevel);
       
 }
 function getSettings(){
@@ -23,7 +25,7 @@ function getSettings(){
 }
 
 function recordAction(action){
-
+ if(!hasReachedCriticalLevel()){
 	let cost = 0
 	if(action === 'sms'){
 		cost = smsCost
@@ -34,8 +36,9 @@ function recordAction(action){
 	actionList.push({
 		type: action,
 		cost,
-		timestamp: new Date()
-	});
+		timestamp: moment().startOf('minutes').fromNow()
+	})
+	}		
 }
 	function actions(){
 		return actionList
@@ -61,7 +64,8 @@ function recordAction(action){
 		return{
 			smsTotal,
 			callTotal,
-			grandTotal : grandTotal()
+			grandTotal : grandTotal(),
+			color: totalClassName()
 		}
 
 	}
@@ -78,6 +82,16 @@ function hasReachedCriticalLevel(){
 	
 	return total >= criticalLevel
 }
+function totalClassName(){
+ 		if(hasReachedCriticalLevel()){
+ 			return 'danger'
+ 		}
+
+ 		else if(hasReachedWarningLevel()){
+ 			return 'warning'
+ 		}	
+ 	}
+
  	
 	return {
 		setSettings,

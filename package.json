@@ -7,8 +7,8 @@
     "test": "test"
   },
   "scripts": {
-  "test": "mocha"
- },
+    "test": "mocha"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
-    "express-handlebars": "^5.1.0"
+    "express-handlebars": "^5.1.0",
+    "moment": "^2.27.0"
   }
 }
