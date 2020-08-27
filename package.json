@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "directories": {
-    "test": "test"
+  "test": "test",
+  "start": "node index.js"
+
+
   },
   "scripts": {
     "test": "mocha"
