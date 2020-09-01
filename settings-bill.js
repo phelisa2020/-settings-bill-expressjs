@@ -32,6 +32,9 @@ function recordAction(action){
 	else if(action === 'call'){
 		cost = callCost
 	}
+	else{
+		return ''
+	}
 	actionList.push({
 		type: action,
 		cost,
